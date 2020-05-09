@@ -106,7 +106,7 @@ class NewTask extends Component {
         'input',
         {
           type: 'text',
-          placeHolder: 'Task Name',
+          placeholder: 'Task Name',
           value: this.state.name,
           onChange: this.nameChangedHandler
         }
