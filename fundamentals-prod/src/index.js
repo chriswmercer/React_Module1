@@ -20,26 +20,47 @@ class Project extends Component {
   }
 
   render() {
-    return React.createElement(
-      'div',
-      { className: 'projectName' },
-      this.props.name,
-      this.props.children,
-      React.createElement(
-        'div',
-        {},
-        this.props.description,
-        this.state.tasks.map((task) => {
-          return React.createElement(Task, {
-            key: task.id,
-            id: task.id,
-            name: task.name
-          })
-        })
-      ),
-    React.createElement(NewTask, {
-      handleSubmit: this.submitHandler
-    }))
+    //CODE
+    // return React.createElement(
+    //   'div',
+    //   { className: 'projectName' },
+    //   this.props.name,
+    //   this.props.children,
+    //   React.createElement(
+    //     'div',
+    //     {},
+    //     this.props.description,
+    //     this.state.tasks.map((task) => {
+    //       return React.createElement(Task, {
+    //         key: task.id,
+    //         id: task.id,
+    //         name: task.name
+    //       })
+    //     })
+    //   ),
+    // React.createElement(NewTask, {
+    //   handleSubmit: this.submitHandler
+    // }))
+
+    //JSX
+    return (
+      <div className="Project">
+        <h3>Project Name: </h3>
+        <span>{this.props.name}</span>
+        <p>{this.props.description}</p>
+        {this.state.tasks.map(task => (
+          <Task 
+            key={task.id}
+            id={task.id}
+            name={task.name}
+          />
+        ))}
+        <div>
+          <h3>New Task</h3>
+          <NewTask handleSubmit={this.submitHandler}/>
+        </div>
+      </div>
+    )
   }
 }
 
@@ -52,10 +73,8 @@ Project.propTypes = {
 
 class Task extends Component {
   render() {
-    return React.createElement(
-      'li',
-      { className: 'taskName' },
-      this.props.name
+    return(
+      <li className='taskName'>{this.props.name}</li>
     )
   }
 }
@@ -95,30 +114,40 @@ class NewTask extends Component {
     })
   }
 
+  //JSX
   render() {
-    return React.createElement(
-      'form',
-      {
-        onSubmit: this.submitHandler
-      },
-      React.createElement('p', {}, this.state.name),
-      React.createElement(
-        'input',
-        {
-          type: 'text',
-          placeholder: 'Task Name',
-          value: this.state.name,
-          onChange: this.nameChangedHandler
-        }
-      ), 
-      React.createElement(
-        'input',
-        {
-          type: 'submit',
-          value: 'Post'
-        }
-      )
+    return (
+      <form onSubmit={this.submitHandler}>
+        <p>{this.state.name}</p>
+        <input type="text" placeholder="Task Name" value={this.state.name} onChange={this.nameChangedHandler} />
+        <input type="submit" value="post" />
+      </form>
     )
+
+    //CODE
+    // return React.createElement(
+    //   'form',
+    //   {
+    //     onSubmit: this.submitHandler
+    //   },
+    //   React.createElement('p', {}, this.state.name),
+    //   React.createElement(
+    //     'input',
+    //     {
+    //       type: 'text',
+    //       placeholder: 'Task Name',
+    //       value: this.state.name,
+    //       onChange: this.nameChangedHandler
+    //     }
+    //   ), 
+    //   React.createElement(
+    //     'input',
+    //     {
+    //       type: 'submit',
+    //       value: 'Post'
+    //     }
+    //   )
+    // )
   }
 }
 
@@ -140,4 +169,3 @@ const App = React.createElement(Project, {
 });
 
 render(App, root);
-
